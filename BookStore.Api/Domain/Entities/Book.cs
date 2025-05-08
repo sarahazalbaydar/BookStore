@@ -5,8 +5,8 @@ namespace BookStore.Api.Domain.Entities
 {
     public class Book: BaseEntity
     {
-        //[Required]
-        //public long CategoryId { get; set; }
+        [Required]
+        public int GenreId { get; set; }
 
         [Required(ErrorMessage = "Title is required.")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Title must be between 2 and 100 characters.")]

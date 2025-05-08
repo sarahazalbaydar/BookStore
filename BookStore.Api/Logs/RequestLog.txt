@@ -1,0 +1,8 @@
+---- Request Start ----
+[2025-05-08 18:16:32] Request started: /api/Books/GetAll
+[2025-05-08 18:16:33] Request ended:   /api/Books/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 18:16:37] Request started: /api/Books/GetById/3
+[2025-05-08 18:16:37] Request ended:   /api/Books/GetById/3
+---- Request End ----

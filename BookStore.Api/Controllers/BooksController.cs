@@ -1,4 +1,8 @@
-﻿using BookStore.Api.Domain.Entities;
+﻿using BookStore.Api.DBOperations;
+using BookStore.Api.Domain.Entities;
+using BookStore.Api.Services.Implementations;
+using BookStore.Api.Services.Interfaces;
+using BookStore.Base.ApiResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,136 +12,78 @@ namespace BookStore.Api.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        Book[] books = new Book[]
-        {
-            new Book
-            {
-                Title = "1984",
-                Author = "George Orwell",
-                ISBN = "9780451524935",
-                Price = 62,
-                Stock = 10,
-                PageCount = 328,
-                PublishedDate = new DateTime(1949, 6, 8),
-                Publisher = "Secker & Warburg",
-                Description = "Dystopian novel about a totalitarian regime.",
-            },
-            new Book
-            {
-                Title = "To Kill a Mockingbird",
-                Author = "Harper Lee",
-                ISBN = "9780061120084",
-                Price = 42,
-                Stock = 5,
-                PageCount = 281,
-                PublishedDate = new DateTime(1960, 7, 11),
-                Publisher = "J.B. Lippincott & Co.",
-                Description = "A novel about racial injustice in the American South.",
-            },
-            new Book
-            {
-                Title = "The Great Gatsby",
-                Author = "F. Scott Fitzgerald",
-                ISBN = "9780743273565",
-                Price = 48,
-                Stock = 3,
-                PageCount = 180,
-                PublishedDate = new DateTime(1925, 4, 10),
-                Publisher = "Charles Scribner's Sons",
-                Description = "A story of wealth, love, and the American dream.",
-            }
-        };
+        private readonly IBookService _bookService;
 
-        [HttpGet("GetAll")]
-        public IEnumerable<Book> GetBooks()
+        public BooksController(IBookService bookService)
         {
-            return books;
+            _bookService = bookService;
         }
 
-        //[HttpGet("GetById/{id}")]
-        //public Book GetBookById([FromRoute] long id)
-        //{
-        //    return books[Convert.ToInt32(id) % 3]; // Just to simulate different books
-        //}
-
-        [HttpGet]
-        public Book GetBookById([FromQuery] long id)
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
         {
-            return books[Convert.ToInt32(id) % 3]; // Just to simulate different books
+            var result = _bookService.GetAllBooks();
+            if (!result.Success)
+                return NotFound(result);
+
+            return Ok(result);
+        }
+
+        [HttpGet("GetById/{id}")]
+        public IActionResult GetById([FromRoute] long id)
+        {
+            var result = _bookService.GetBookById(id);
+            if (!result.Success)
+                return NotFound(result);
+
+            return Ok(result);
         }
 
         [HttpPost]
-        public Book Post([FromBody] Book book)
+        public IActionResult Create([FromBody] Book newBook)
         {
-            return book;
+            var result = _bookService.CreateBook(newBook);
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public Book Put([FromRoute]long id, [FromBody] Book book)
+        public IActionResult Update([FromRoute] long id, [FromBody] Book book)
         {
-            return book;
+            var result = _bookService.UpdateBook(id, book);
+            if (!result.Success)
+                return NotFound(result);
+
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public void Delete([FromRoute] long id)
+        public IActionResult Delete([FromRoute] long id)
         {
+            var result = _bookService.DeleteBook(id);
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
         }
 
-        //example of a PATCH request(for partial update)
-        [HttpPatch("PatchByPriceOrStock/{id}")]
-        public IActionResult PatchBookByPriceOrStock(long id, [FromBody] Dictionary<string, object> updates)
+        [HttpPatch("PatchPriceOrStock2/{id}")]
+        public IActionResult PatchPriceOrStock([FromRoute] long id, [FromBody] Dictionary<string, object> updates)
         {
-            var book = books.FirstOrDefault(b => b.Id == id);
-            if (book == null)
-            {
-                return NotFound(new { message = "Book not found" });
-            }
+            var result = _bookService.PatchBookPriceOrStock(id, updates);
+            if (!result.Success)
+                return BadRequest(result);
 
-            foreach (var key in updates.Keys)
-            {
-                switch (key.ToLower())
-                {
-                    case "price":
-                        if (decimal.TryParse(updates[key]?.ToString(), out decimal price))
-                        {
-                            if (price < 0)
-                            {
-                                return BadRequest(new { message = "Price must be greater than zero." });
-                            }
-                            book.Price = price;
-                        }
-                        else
-                        {
-                            return BadRequest(new { message = "Invalid price value." });
-                        }
-                        break;
-
-                    case "stock":
-                        if (int.TryParse(updates[key]?.ToString(), out int stock) && stock >= 0)
-                            book.Stock = stock;
-                        else
-                        {
-                            return BadRequest(new { message = "Stock must be a non-negative integer." });
-                        }
-                            break;
-                    default:
-                        return BadRequest(new { message = $"Field '{key}' cannot be updated or does not exist." });
-                }
-            }
-
-            return Ok(book);
+            return Ok(result);
         }
 
-        //example of sorting books by price
-        [HttpGet("SortByPrice/{isAscending}")]
-        public IActionResult SortBooksByPrice([FromRoute] bool isAscending = true)
+        [HttpGet("SortByPrice2")]
+        public IActionResult SortByPrice([FromQuery] bool isAscending)
         {
-            var sortedBooks = isAscending
-                ? books.OrderBy(b => b.Price).ToList()
-                : books.OrderByDescending(b => b.Price).ToList();
-
-            return Ok(sortedBooks);
+            var result = _bookService.SortBooksByPrice(isAscending);
+            return Ok(result);
         }
-
     }
 }
