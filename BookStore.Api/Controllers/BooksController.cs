@@ -78,7 +78,10 @@ namespace BookStore.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] long id)
         {
-            var result = _bookService.DeleteBook(id);
+            var command = new DeleteBookCommand { Id = id };
+            var handler = new DeleteBookCommandHandler(_context);
+            var result = handler.Handle(command);
+
             if (!result.Success)
                 return BadRequest(result);
 

@@ -15,6 +15,8 @@ namespace BookStore.Api.Mapping
 
             CreateMap<GetBookByIdQuery, Book>();
             CreateMap<Book, BookResponseModel>();
+            
+            CreateMap<DeleteBookCommand, Book>();
         }
 
     }

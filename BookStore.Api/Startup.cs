@@ -3,6 +3,8 @@ using BookStore.Api.Extensions;
 using BookStore.Api.Mapping;
 using BookStore.Api.Services.Implementations;
 using BookStore.Api.Services.Interfaces;
+using BookStore.Api.Validators;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Api;
@@ -29,6 +31,8 @@ public class Startup
         // Dependency Injection
         services.AddScoped<IBookService, EfBookService>();
         services.AddAutoMapper(typeof(MappingProfile));
+        services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UpdateBookCommandValidator>());
+
 
 
     }
