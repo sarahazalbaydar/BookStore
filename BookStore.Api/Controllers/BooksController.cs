@@ -1,4 +1,5 @@
-﻿using BookStore.Api.DBOperations;
+﻿using AutoMapper;
+using BookStore.Api.DBOperations;
 using BookStore.Api.Domain.Entities;
 using BookStore.Api.Features.Commands;
 using BookStore.Api.Features.Queries;
@@ -17,11 +18,13 @@ namespace BookStore.Api.Controllers
     {
         private readonly IBookService _bookService;
         private readonly BookStoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        public BooksController(IBookService bookService, BookStoreDbContext context)
+        public BooksController(IBookService bookService, BookStoreDbContext context, IMapper mapper)
         {
             _bookService = bookService;
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet("GetAll")]
@@ -38,7 +41,7 @@ namespace BookStore.Api.Controllers
         public IActionResult GetById([FromRoute] long id)
         {
             var query = new GetBookByIdQuery { Id = id };
-            var handler = new GetBookByIdQueryHandler(_context);
+            var handler = new GetBookByIdQueryHandler(_context, _mapper);
             var result = handler.Handle(query);
 
             if (!result.Success)
@@ -63,7 +66,7 @@ namespace BookStore.Api.Controllers
             if (id != command.Id)
                 return BadRequest("ID in URL and body do not match.");
 
-            var handler = new UpdateBookCommandHandler(_context);
+            var handler = new UpdateBookCommandHandler(_context, _mapper);
             var result = handler.Handle(command);
 
             if (!result.Success)

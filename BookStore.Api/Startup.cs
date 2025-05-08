@@ -1,5 +1,6 @@
 ﻿using BookStore.Api.DBOperations;
 using BookStore.Api.Extensions;
+using BookStore.Api.Mapping;
 using BookStore.Api.Services.Implementations;
 using BookStore.Api.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ public class Startup
 
         // Dependency Injection
         services.AddScoped<IBookService, EfBookService>();
+        services.AddAutoMapper(typeof(MappingProfile));
 
 
     }
