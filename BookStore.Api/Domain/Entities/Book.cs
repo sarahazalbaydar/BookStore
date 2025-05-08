@@ -41,10 +41,10 @@ namespace BookStore.Api.Domain.Entities
 
 
         [StringLength(1500, ErrorMessage = "Description cannot exceed 1500 characters.")]
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
         [Url(ErrorMessage = "Invalid URL format.")]
-        public string? CoverImageUrl { get; set; }
+        public string CoverImageUrl { get; set; }
 
         //public virtual Category Category { get; set; }
     }

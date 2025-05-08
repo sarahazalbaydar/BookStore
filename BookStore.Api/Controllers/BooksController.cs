@@ -1,10 +1,13 @@
 ﻿using BookStore.Api.DBOperations;
 using BookStore.Api.Domain.Entities;
+using BookStore.Api.Features.Commands;
+using BookStore.Api.Features.Queries;
 using BookStore.Api.Services.Implementations;
 using BookStore.Api.Services.Interfaces;
 using BookStore.Base.ApiResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Api.Controllers
 {
@@ -13,10 +16,12 @@ namespace BookStore.Api.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _bookService;
+        private readonly BookStoreDbContext _context;
 
-        public BooksController(IBookService bookService)
+        public BooksController(IBookService bookService, BookStoreDbContext context)
         {
             _bookService = bookService;
+            _context = context;
         }
 
         [HttpGet("GetAll")]
@@ -32,7 +37,10 @@ namespace BookStore.Api.Controllers
         [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] long id)
         {
-            var result = _bookService.GetBookById(id);
+            var query = new GetBookByIdQuery { Id = id };
+            var handler = new GetBookByIdQueryHandler(_context);
+            var result = handler.Handle(query);
+
             if (!result.Success)
                 return NotFound(result);
 
@@ -50,9 +58,14 @@ namespace BookStore.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update([FromRoute] long id, [FromBody] Book book)
+        public IActionResult Update([FromRoute] long id, [FromBody] UpdateBookCommand command)
         {
-            var result = _bookService.UpdateBook(id, book);
+            if (id != command.Id)
+                return BadRequest("ID in URL and body do not match.");
+
+            var handler = new UpdateBookCommandHandler(_context);
+            var result = handler.Handle(command);
+
             if (!result.Success)
                 return NotFound(result);
 

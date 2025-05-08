@@ -29,6 +29,7 @@ public class DataGenerator
                     PublishedDate = new DateTime(1949, 6, 8),
                     Publisher = "Secker & Warburg",
                     Description = "Dystopian novel about a totalitarian regime.",
+                    CoverImageUrl = "https://example.com/1984.jpg",
                     CreatedDate = DateTime.Now,
                     IsActive = true,
                 },
@@ -44,6 +45,7 @@ public class DataGenerator
                     PublishedDate = new DateTime(1960, 7, 11),
                     Publisher = "J.B. Lippincott & Co.",
                     Description = "A novel about racial injustice in the American South.",
+                    CoverImageUrl = "https://example.com/mockingbird.jpg",
                     CreatedDate = DateTime.Now,
                     IsActive = true,
                 },
@@ -59,6 +61,7 @@ public class DataGenerator
                     PublishedDate = new DateTime(1925, 4, 10),
                     Publisher = "Charles Scribner's Sons",
                     Description = "A story of wealth, love, and the American dream.",
+                    CoverImageUrl = "https://example.com/gatsby.jpg",
                     CreatedDate = DateTime.Now,
                     IsActive = true,
                 }
