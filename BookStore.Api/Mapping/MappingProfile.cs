@@ -22,5 +22,10 @@ public class MappingProfile:Profile
         CreateMap<CreateGenreCommand, Genre>();
         CreateMap<UpdateGenreCommand, Genre>();
 
+        CreateMap<Author, AuthorResponseModel>();
+
+        CreateMap<CreateAuthorCommand, Author>();
+        CreateMap<UpdateAuthorCommand, Author>();
+
     }
 }

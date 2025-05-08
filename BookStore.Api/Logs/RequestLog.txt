@@ -54,3 +54,19 @@
 [2025-05-08 22:49:33] Request started: /api/Books/GetById/2
 [2025-05-08 22:49:33] Request ended:   /api/Books/GetById/2
 ---- Request End ----
+---- Request Start ----
+[2025-05-08 23:49:56] Request started: /api/Authors/GetAll
+[2025-05-08 23:49:56] Request ended:   /api/Authors/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 23:50:08] Request started: /api/Authors/GetById/1
+[2025-05-08 23:50:08] Request ended:   /api/Authors/GetById/1
+---- Request End ----
+---- Request Start ----
+[2025-05-08 23:50:14] Request started: /api/Authors/4
+[2025-05-08 23:50:14] Request ended:   /api/Authors/4
+---- Request End ----
+---- Request Start ----
+[2025-05-08 23:50:29] Request started: /api/Authors/GetAll
+[2025-05-08 23:50:29] Request ended:   /api/Authors/GetAll
+---- Request End ----

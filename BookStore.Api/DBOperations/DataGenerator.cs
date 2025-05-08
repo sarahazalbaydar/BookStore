@@ -12,10 +12,9 @@ public class DataGenerator
         {
 
             // If database already contains data, not seed it again
-            if (context.Books.Any() || context.Genres.Any())
-            {
+            if (context.Books.Any() || context.Genres.Any() || context.Authors.Any())
                 return;
-            }
+
 
             context.Genres.AddRange(
                 new Genre { Name = "Dystopian", CreatedDate = DateTime.Now, IsActive = true },
@@ -73,6 +72,57 @@ public class DataGenerator
                     CoverImageUrl = "https://example.com/gatsby.jpg",
                     CreatedDate = DateTime.Now,
                     IsActive = true,
+                }
+            );
+
+            context.Authors.AddRange(
+                new Author
+                {
+                    FirstName = "George",
+                    LastName = "Orwell",
+                    DateOfBirth = new DateTime(1903, 6, 25),
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
+                },
+                new Author
+                {
+                    FirstName = "Harper",
+                    LastName = "Lee",
+                    DateOfBirth = new DateTime(1926, 4, 28),
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
+                },
+                new Author
+                {
+                    FirstName = "F. Scott",
+                    LastName = "Fitzgerald",
+                    DateOfBirth = new DateTime(1896, 9, 24),
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
+                },
+                new Author
+                {
+                    FirstName = "Jane",
+                    LastName = "Austen",
+                    DateOfBirth = new DateTime(1775, 12, 16),
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
+                },
+                new Author
+                {
+                    FirstName = "Mark",
+                    LastName = "Twain",
+                    DateOfBirth = new DateTime(1835, 11, 30),
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
+                },
+                new Author
+                {
+                    FirstName = "Agatha",
+                    LastName = "Christie",
+                    DateOfBirth = new DateTime(1890, 9, 15),
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
                 }
             );
 
