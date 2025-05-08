@@ -7,7 +7,7 @@
         public string ISBN { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
-        public int GenreId { get; set; }
+        public long GenreId { get; set; }
         public int PageCount { get; set; }
         public DateTime PublishedDate { get; set; }
         public string Publisher { get; set; }

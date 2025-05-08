@@ -6,7 +6,7 @@ namespace BookStore.Api.Domain.Entities
     public class Book: BaseEntity
     {
         [Required]
-        public int GenreId { get; set; }
+        public long GenreId { get; set; }
 
         [Required(ErrorMessage = "Title is required.")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Title must be between 2 and 100 characters.")]
@@ -46,6 +46,6 @@ namespace BookStore.Api.Domain.Entities
         [Url(ErrorMessage = "Invalid URL format.")]
         public string CoverImageUrl { get; set; }
 
-        //public virtual Category Category { get; set; }
+        public Genre Genre { get; set; }
     }
 }

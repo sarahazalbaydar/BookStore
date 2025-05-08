@@ -12,10 +12,20 @@ public class DataGenerator
         {
 
             // If database already contains data, not seed it again
-            if (context.Books.Any())
+            if (context.Books.Any() || context.Genres.Any())
             {
                 return;
             }
+
+
+            context.Genres.AddRange(
+                new Genre { Name = "Dystopian", CreatedDate = DateTime.Now, IsActive = true },
+                new Genre { Name = "Classic Literature", CreatedDate = DateTime.Now, IsActive = true },
+                new Genre { Name = "Historical Fiction", CreatedDate = DateTime.Now, IsActive = true },
+                new Genre { Name = "Science Fiction", CreatedDate = DateTime.Now, IsActive = true },
+                new Genre { Name = "Mystery", CreatedDate = DateTime.Now, IsActive = true }
+            );
+
             context.Books.AddRange(
                 new Book
                 {
@@ -69,7 +79,5 @@ public class DataGenerator
 
             context.SaveChanges();
         }
-
-
     }
 }

@@ -6,3 +6,51 @@
 [2025-05-08 18:16:37] Request started: /api/Books/GetById/3
 [2025-05-08 18:16:37] Request ended:   /api/Books/GetById/3
 ---- Request End ----
+---- Request Start ----
+[2025-05-08 22:44:57] Request started: /api/Books/GetAll
+[2025-05-08 22:44:57] Request ended:   /api/Books/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:45:01] Request started: /api/Genres/GetAll
+[2025-05-08 22:45:01] Request ended:   /api/Genres/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:47:45] Request started: /api/Genres/GetAll
+[2025-05-08 22:47:45] Request ended:   /api/Genres/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:47:58] Request started: /api/Genres/GetById/4
+[2025-05-08 22:47:58] Request ended:   /api/Genres/GetById/4
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:48:35] Request started: /api/Genres/5
+[2025-05-08 22:48:35] Request ended:   /api/Genres/5
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:48:42] Request started: /api/Genres/GetById/5
+[2025-05-08 22:48:42] Request ended:   /api/Genres/GetById/5
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:48:50] Request started: /api/Genres/GetAll
+[2025-05-08 22:48:50] Request ended:   /api/Genres/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:49:04] Request started: /api/Genres/5
+[2025-05-08 22:49:04] Request ended:   /api/Genres/5
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:49:08] Request started: /api/Genres/GetById/5
+[2025-05-08 22:49:08] Request ended:   /api/Genres/GetById/5
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:49:11] Request started: /api/Genres/GetAll
+[2025-05-08 22:49:11] Request ended:   /api/Genres/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:49:24] Request started: /api/Books/GetAll
+[2025-05-08 22:49:24] Request ended:   /api/Books/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-08 22:49:33] Request started: /api/Books/GetById/2
+[2025-05-08 22:49:33] Request ended:   /api/Books/GetById/2
+---- Request End ----
