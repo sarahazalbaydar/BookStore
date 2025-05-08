@@ -23,12 +23,12 @@ public class UpdateBookCommandHandler
         if (book == null)
             return new ApiResponse<BookResponseModel>("Book not found");
 
-        _mapper.Map(command, book); // AutoMapper ile güncelle
+        _mapper.Map(command, book);
         book.UpdatedDate = DateTime.Now;
 
         _context.SaveChanges();
 
-        var response = _mapper.Map<BookResponseModel>(book); // AutoMapper ile dönüştür
+        var response = _mapper.Map<BookResponseModel>(book);
         return new ApiResponse<BookResponseModel>(response);
     }
 }

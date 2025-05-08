@@ -30,8 +30,11 @@ namespace BookStore.Api.Controllers
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var result = _bookService.GetAllBooks();
-            if (!result.Success)
+            var query = new GetAllBooksQuery();
+            var handler = new GetAllBooksQueryHandler(_context, _mapper);
+            var result = handler.Handle(query);
+
+            if (!result.Success || result.Response == null || result.Response.Count == 0)
                 return NotFound(result);
 
             return Ok(result);
@@ -51,9 +54,11 @@ namespace BookStore.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Book newBook)
+        public IActionResult Create([FromBody] CreateBookCommand command)
         {
-            var result = _bookService.CreateBook(newBook);
+            var handler = new CreateBookCommandHandler(_context, _mapper);
+            var result = handler.Handle(command);
+
             if (!result.Success)
                 return BadRequest(result);
 
@@ -88,7 +93,7 @@ namespace BookStore.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPatch("PatchPriceOrStock2/{id}")]
+        [HttpPatch("PatchPriceOrStock/{id}")]
         public IActionResult PatchPriceOrStock([FromRoute] long id, [FromBody] Dictionary<string, object> updates)
         {
             var result = _bookService.PatchBookPriceOrStock(id, updates);
@@ -98,7 +103,7 @@ namespace BookStore.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("SortByPrice2")]
+        [HttpGet("SortByPrice")]
         public IActionResult SortByPrice([FromQuery] bool isAscending)
         {
             var result = _bookService.SortBooksByPrice(isAscending);

@@ -10,13 +10,13 @@ namespace BookStore.Api.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<UpdateBookCommand, Book>();
             CreateMap<Book, BookResponseModel>();
 
+            CreateMap<UpdateBookCommand, Book>();
             CreateMap<GetBookByIdQuery, Book>();
-            CreateMap<Book, BookResponseModel>();
-            
             CreateMap<DeleteBookCommand, Book>();
+            CreateMap<CreateBookCommand, Book>();
+
         }
 
     }
