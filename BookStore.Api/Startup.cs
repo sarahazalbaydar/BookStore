@@ -30,7 +30,9 @@ public class Startup
 
         // Dependency Injection
         services.AddScoped<IBookService, EfBookService>();
+
         services.AddAutoMapper(typeof(MappingProfile));
+
         services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UpdateBookCommandValidator>());
 
 
