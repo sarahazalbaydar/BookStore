@@ -70,3 +70,11 @@
 [2025-05-08 23:50:29] Request started: /api/Authors/GetAll
 [2025-05-08 23:50:29] Request ended:   /api/Authors/GetAll
 ---- Request End ----
+---- Request Start ----
+[2025-05-12 22:49:15] Request started: /api/Authors/GetAll
+[2025-05-12 22:49:15] Request ended:   /api/Authors/GetAll
+---- Request End ----
+---- Request Start ----
+[2025-05-12 23:15:26] Request started: /api/Genres/GetAll
+[2025-05-12 23:15:26] Request ended:   /api/Genres/GetAll
+---- Request End ----
